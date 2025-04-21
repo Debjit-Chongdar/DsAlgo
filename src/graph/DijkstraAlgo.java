@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class DisktraAlgo {
+public class DijkstraAlgo {
     private List<Vertex> vertices = new ArrayList<>();
     public void addVertex(Vertex vertex){
         vertices.add(vertex);
@@ -13,21 +13,21 @@ public class DisktraAlgo {
         Edge edge = new Edge(source, target, distance);
         source.neighbours.add(edge);
     }
-    public void calculateShortestPath(Vertex source){
-        source.distance=0.0;
+    public void calculateShortestPath(Vertex start){
+        start.weight=0.0;
         PriorityQueue<Vertex> pQueue = new PriorityQueue<>();
-        pQueue.offer(source);
+        pQueue.offer(start);
         while(!pQueue.isEmpty()){
-            Vertex u = pQueue.poll();
+            Vertex source = pQueue.poll();
             //u.isVisited=true; -- this will protect to re compute
-            List<Edge> neighbours = u.neighbours;
+            List<Edge> neighbours = source.neighbours;
             for(Edge edge : neighbours){
                 Vertex target = edge.target;
                 //if(!target.isVisited){ -- this will protect to recompute
                     pQueue.remove(target);//if already present then remove
-                    if(target.distance > (u.distance + edge.distance)){
-                        target.previousVertex = u;
-                        target.distance = u.distance + edge.distance;
+                    if(target.weight > (source.weight + edge.distance)){
+                        target.previousVertex = source;
+                        target.weight = source.weight + edge.distance;
                     }
                     pQueue.offer(target);
                 //}
@@ -36,7 +36,7 @@ public class DisktraAlgo {
     }
 
     public static void main(String[] args) {
-        DisktraAlgo test = new DisktraAlgo();
+        DijkstraAlgo test = new DijkstraAlgo();
         Vertex source = createAllVertexAndEdges(test);
         test.calculateShortestPath(source);
         printDistanceAndPath(test.vertices.get(1));
@@ -44,7 +44,7 @@ public class DisktraAlgo {
         printDistanceAndPath(test.vertices.get(5));
         printDistanceAndPath(test.vertices.get(6));
     }
-    private static Vertex createAllVertexAndEdges(DisktraAlgo test){
+    private static Vertex createAllVertexAndEdges(DijkstraAlgo test){
         Vertex a = new Vertex("A");
         Vertex b = new Vertex("B");
         Vertex c = new Vertex("C");
@@ -80,12 +80,12 @@ public class DisktraAlgo {
         return a;
     }
     static void printDistanceAndPath(Vertex target){
-        System.out.println("Distance = (A -> "+target.name +") : "+target.distance);
+        System.out.println("Distance = (A -> "+target.name +") : "+target.weight);
         System.out.print("Path = ");
         printPath(target);
         System.out.println();
     }
-    private static void printPath(Vertex target){
+    protected static void printPath(Vertex target){
         if(target == null){
             return;
         }
