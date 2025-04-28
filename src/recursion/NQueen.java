@@ -24,20 +24,21 @@ public class NQueen {
         }
         return false;
     }
-    public static int wayToRepresentNQueen(boolean[][] board, int row, int col){
+    public static int wayToRepresentNQueen(boolean[][] board, int row){
         if(row >= board.length){
             showPath(board, "Q");
             System.out.println("-----------------");
             return 1;
         }
         int count = 0;
-        if(isSafe(board, row,col)){
-            board[row][col] = true;
-            count += wayToRepresentNQueen(board, row+1, 0);
-            board[row][col] = false;
-        }
-        if(col < board[row].length-1){
-            count += wayToRepresentNQueen(board, row, col+1);
+        //check for all columns one by one to see if nqueen possible
+        for(int col = 0; col<board[row].length; col++) {
+            //it will check for all columns one by one
+            if (isSafe(board, row, col)) {
+                board[row][col] = true;
+                count += wayToRepresentNQueen(board, row + 1);
+                board[row][col] = false;
+            }
         }
         return count;
     }
@@ -79,6 +80,6 @@ public class NQueen {
         System.out.println(isNQueenPossible(board, 0));
         boolean[][] board1 = new boolean[4][4];
         System.out.println("how many way we can represent NQueen for 4*4 board");
-        System.out.println(wayToRepresentNQueen(board1, 0,0));
+        System.out.println(wayToRepresentNQueen(board1, 0));
     }
 }
