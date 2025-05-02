@@ -1,52 +1,56 @@
 package design_pattern.object_creation;
 
-public class FactoryMethod {
-    interface Ext{
-        void getData();
+interface ExtractionType {
+    void getData();
+}
+class RaExtraction implements ExtractionType {
+    @Override
+    public void getData() {
+        System.out.println("Ra extraction ...");
     }
-    static class RaExt implements Ext{
-        @Override
-        public void getData() {
-            System.out.println("Ra extraction ...");
-        }
+}
+class VarExtraction implements ExtractionType {
+    @Override
+    public void getData() {
+        System.out.println("Var extraction ...");
     }
-    static class VarExt implements Ext{
-        @Override
-        public void getData() {
-            System.out.println("Var extraction ...");
-        }
+}
+
+interface ExtractionFactory {
+    ExtractionType getExtractionType();
+}
+class RaExtFactory implements ExtractionFactory {
+    @Override
+    public ExtractionType getExtractionType() {
+        return new RaExtraction();
     }
-    interface ExtFactory{
-        Ext getExt();
+}
+class VarExtractionFactory implements ExtractionFactory {
+    @Override
+    public ExtractionType getExtractionType() {
+        return new VarExtraction();
     }
-    static class RaExtFactory implements ExtFactory{
-        @Override
-        public Ext getExt() {
-            return new RaExt();
-        }
-    }
-    static class VarExtFactory implements ExtFactory{
-        @Override
-        public Ext getExt() {
-            return new VarExt();
-        }
-    }
-    static class Client{
-        Ext ext;
-        Client(ExtFactory factory){
-            ext = factory.getExt();
-        }
-        Ext extract(){
-            return ext;
-        }
+}
+
+class Client {
+    ExtractionType extractionType;
+
+    Client(ExtractionFactory factory) {
+        extractionType = factory.getExtractionType();
     }
 
+    ExtractionType extractionType() {
+        return extractionType;
+    }
+}
+
+public class FactoryMethod {
     public static void main(String[] args) {
         Client client = new Client(new RaExtFactory());
-        Ext raExt= client.extract();
-        raExt.getData();
-        Client vClient = new Client(new VarExtFactory());
-        Ext varExt= vClient.extract();
-        varExt.getData();
+        ExtractionType raExtractionType = client.extractionType();
+        raExtractionType.getData();
+        Client vClient = new Client(new VarExtractionFactory());
+        ExtractionType varExtractionType = vClient.extractionType();
+        varExtractionType.getData();
     }
 }

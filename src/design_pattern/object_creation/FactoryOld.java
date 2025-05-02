@@ -1,35 +1,44 @@
 package design_pattern.object_creation;
 
+interface Extraction {
+    void getData();
+
+    void mapResponse();
+}
+
+class RAExtraction implements Extraction {
+    @Override
+    public void getData() {
+        System.out.println("Ra Extracted data");
+    }
+
+    @Override
+    public void mapResponse() {
+        System.out.println("RA extracted data Map to common response");
+    }
+}
+
+class VaRExtraction implements Extraction {
+    @Override
+    public void getData() {
+        System.out.println("Var Extracted data");
+    }
+
+    @Override
+    public void mapResponse() {
+        System.out.println("Map Var extracted data to common response");
+    }
+}
+
 public class FactoryOld {
-    interface Extraction{
-        void getData();
-        void mapResponse();
-    }
-    class RaExtraction implements Extraction{
-        @Override
-        public void getData() {
-            System.out.println("Ra Extracted data");
-        }
-        @Override
-        public void mapResponse() {
-            System.out.println("RA extracted data Map to common response");
-        }
-    }
-    class VarExtraction implements Extraction{
-        @Override
-        public void getData() {
-            System.out.println("Var Extracted data");
-        }
-        @Override
-        public void mapResponse() {
-            System.out.println("Map Var extracted data to common response");
-        }
-    }
-    public Extraction extraction(String type){
-        switch(type.toLowerCase()){
-            case "ra" : return new RaExtraction();
-            case "var": return new VarExtraction();
-            default: return new RaExtraction();
+    public Extraction extraction(String type) {
+        switch (type.toLowerCase()) {
+            case "ra":
+                return new RAExtraction();
+            case "var":
+                return new VaRExtraction();
+            default:
+                return new RAExtraction();
         }
     }
 
