@@ -1,39 +1,42 @@
 package design_pattern.object_creation;
 
 public class Builder {
+    //it's always not a static class, if it's not inside a class
     static class Emp{
         private int id;
         private String name;
+        //create constructor to create object easily
+        public Emp(int id, String name){
+            this.name = name;
+            this.id = id;
+        }
+        //create a static builder method to return builder
+        public static EmpBuilder builder(){
+            return new EmpBuilder();
+        }
+        //inner class must be static , so it's always static
         static class EmpBuilder{
-            private static int id;
-            private static String name;
-            private static EmpBuilder empBuilder;
-            //this constructor must create and assign Emp object
-            public EmpBuilder(){
-                empBuilder = new EmpBuilder();
+            private int id;
+            private String name;
+            //always return builder so that we can add next parameter
+            public EmpBuilder id(int id){
+                this.id = id;
+                return this;
             }
-            //must be static method to call class.method() and return employee Builder
-            static EmpBuilder id(int id){
-                EmpBuilder.id = id;
-                return empBuilder;
-            }
-            //must be static method to call class.method() and return employee Builder
-            static EmpBuilder name(String name){
-                EmpBuilder.name = name;
-                return empBuilder;
+            //always return builder so that we can add next parameter
+            public EmpBuilder name(String name){
+                this.name = name;
+                return this;
             }
             //create actual Emp object in this method
-            static Emp build(){
-                Emp emp = new Emp();
-                emp.id = id;
-                emp.name = name;
-                return emp;
+            public Emp build(){
+                return new Emp(this.id, this.name);
             }
         }
     }
 
     public static void main(String[] args) {
-        Emp emp = Emp.EmpBuilder.id(2).name("ABC").build();
+        Emp emp = Emp.builder().id(2).name("ABC").build();
         System.out.println(emp.id + "  "+emp.name);
     }
 }
