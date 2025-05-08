@@ -1,6 +1,27 @@
 package problems;
 
 public class WaterProblem {
+    //Simplified version
+    public static int trappingRainWaterSimple(int[] wall){
+        int left = 0;
+        int leftMaxHeight = wall[left];
+        int right = wall.length-1;
+        int rightMaxHeight = wall[right];
+        int totalWater = 0;
+        while (left < right){
+            if(leftMaxHeight < rightMaxHeight){
+                left++; // increment should be first
+                leftMaxHeight = Math.max(leftMaxHeight, wall[left]);
+                totalWater += leftMaxHeight - wall[left];
+            }else{
+                right--; // decrement should be first
+                rightMaxHeight = Math.max(rightMaxHeight, wall[right]);
+                totalWater += rightMaxHeight - wall[right];
+            }
+        }
+        return totalWater;
+    }
+
     public static int trappingRainWater(int[] wall){
         int leftMax = 0;
         int rightMax = wall.length-1;
@@ -46,16 +67,10 @@ public class WaterProblem {
 
     public static void main(String[] args) {
         int[] wall = {0,1,0,2,1,0,1,3,2,1,2,1};
-        int water = trappingRainWater(wall);
-        System.out.println(water);
-        int[] wall1 = {4,2,0,3,2,5};
-        System.out.println(trappingRainWater(wall1));
-        int[] wall2 = {4,2};
-        System.out.println(trappingRainWater(wall2));
-        int[] wall3 = {4,2,3};
-        System.out.println(trappingRainWater(wall3));
-        int[] wall0 = {4};
-        System.out.println(trappingRainWater(wall0));
+        System.out.println(trappingRainWater(wall) +" == "+trappingRainWaterSimple(wall));
+        System.out.println(trappingRainWater(new int[]{4,2,0,3,2,5})+" == "+trappingRainWaterSimple(new int[]{4,2,0,3,2,5}));
+        System.out.println(trappingRainWater(new int[]{4,2})+" == "+trappingRainWaterSimple(new int[]{4,2}));
+        System.out.println(trappingRainWater(new int[]{4,2,3})+" == "+trappingRainWaterSimple(new int[]{4,2,3}));
 
         int[] height = {1,8,6,2,5,4,8,3,7};
         System.out.println(containerWithMostWater(height)+" == 49");
