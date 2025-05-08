@@ -7,8 +7,8 @@ public class WaterProblem {
         int left = 0;
         int right = rightMax;
         int water = 0;
-        while(leftMax<rightMax){
-            if(wall[leftMax] < wall[rightMax]){
+        while(left < right){
+            if(wall[left] < wall[right]){
                 if(wall[leftMax] > wall[left]){
                     water = water + (wall[leftMax] - wall[left]);
                 }else{
