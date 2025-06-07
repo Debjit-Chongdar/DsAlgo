@@ -1,4 +1,4 @@
-package problems.range_query;
+package problems.range_sum;
 
 public class RangeSum {
     //Common approach is Segment tree but it takes n + log(n) time to populate + retrieve
