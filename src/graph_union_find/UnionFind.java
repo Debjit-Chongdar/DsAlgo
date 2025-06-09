@@ -1,4 +1,4 @@
-package graph.union_find;
+package graph_union_find;
 
 //Union Find and Disjoint-Set are same just different name
 public class UnionFind {

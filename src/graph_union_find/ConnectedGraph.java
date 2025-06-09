@@ -1,4 +1,4 @@
-package graph.union_find;
+package graph_union_find;
 
 public class ConnectedGraph {
     //how many connected graph
