@@ -1,4 +1,4 @@
-package problems.range_sum;
+package range_query;
 
 import java.util.Arrays;
 

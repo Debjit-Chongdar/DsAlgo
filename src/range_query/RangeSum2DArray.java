@@ -1,4 +1,4 @@
-package problems.range_sum;
+package range_query;
 
 public class RangeSum2DArray {
     //top left row, col is starting and bottom right row, col is end
