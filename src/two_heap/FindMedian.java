@@ -1,4 +1,4 @@
-package problems;
+package two_heap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,26 +31,12 @@ public class FindMedian {
     private PriorityQueue<Integer> largeHeap = new PriorityQueue<>((a,b) -> a-b); //keep large half values in this queue
 
     public void add_heap(int data){
-        if(smallHeap.isEmpty()){
-            smallHeap.offer(data);
-            return;
-        }
-        if(largeHeap.isEmpty()){ // it's mandatory to check if the value is lesser than small heap data or larger
-            smallHeap.offer(data); // if lesser then that data shoud go smaller heap and smaller heap data should
-            largeHeap.offer(smallHeap.poll()); // come to larger heap
-            return;
-        }
-        //if small of the large is lesser than data then insert in large
-        if(largeHeap.peek() < data){
+        if(smallHeap.size() < largeHeap.size()){ // if smallHeap has less data then we have to add in small heap
             largeHeap.offer(data);
-            if(smallHeap.size()+1 < largeHeap.size()){ // if large heap was already had 1 extra element
-                smallHeap.offer(largeHeap.poll());
-            }
-        }else{ //if(smallHeap.peek() > data || smallHeap.peek() < data){
+            smallHeap.offer(largeHeap.poll());
+        }else{
             smallHeap.offer(data);
-            if(largeHeap.size()+1 < smallHeap.size()){ // if small heap had 1 element extra earlier
-                largeHeap.offer(smallHeap.poll());
-            }
+            largeHeap.offer(smallHeap.poll());
         }
     }
 
@@ -60,8 +46,6 @@ public class FindMedian {
         }
         if(smallHeap.size() == largeHeap.size()){
             return (smallHeap.peek() + largeHeap.peek())/2;
-        }else if(smallHeap.size() > largeHeap.size()){
-            return smallHeap.peek();
         }else{
             return largeHeap.peek();
         }
