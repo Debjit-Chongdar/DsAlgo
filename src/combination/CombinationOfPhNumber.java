@@ -11,12 +11,16 @@ public class CombinationOfPhNumber {
 
     private static List<String> combinations(String digit, int index, String output){
         List<String> result = new ArrayList<>();
-        if(digit.length() == index){
+        if(digit.length() == index){ //till the index less than digit length, it has number pending to add
             result.add(output);
             return result;
         }
-        for(int i=0; i<map[digit.charAt(index)-'0'].length(); i++){
-            result.addAll(combinations(digit, index+1, output+map[digit.charAt(index)-'0'].charAt(i)));
+        //for each number add all possibilities to the output
+        // digit[index] = 2, possibilies are a,b,c
+        int mapPosition = digit.charAt(index)-'0';  // '2'-'0' = 2
+        String tmp = map[mapPosition];
+        for(int i=0; i<tmp.length(); i++){
+            result.addAll(combinations(digit, index+1, output+tmp.charAt(i)));
         }
         return result;
     }
@@ -27,3 +31,7 @@ public class CombinationOfPhNumber {
         System.out.println(letterCombinations("345"));
     }
 }
+//                      (abc)
+//        a             b               c
+//      a(def)          b(def)          c(def)
+//      ad  ae  af      bd be bf        cd ce cf
