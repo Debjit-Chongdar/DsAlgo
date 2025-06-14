@@ -1,4 +1,4 @@
-package combination;
+package permutation_combination;
 
 import java.util.*;
 
