@@ -1,4 +1,4 @@
-package graph_union_find;
+package graph.union_find;
 
 //Union Find and Disjoint-Set are same just different name
 public class UnionFind {
@@ -31,9 +31,9 @@ public class UnionFind {
     }
     // find the top parent for current node
     public int find(int n){
-        if(n == parent[n]){ // if node has no parent or n is it's own parent
-            return n;
+        if(n != parent[n]){ // if node has parent then find and populate top most parent to it's parent
+            parent[n] = find(parent[n]);
         }
-        return find(parent[n]); // if parent is not same as node then find parent's parent until it reach same val
+        return parent[n];
     }
 }
