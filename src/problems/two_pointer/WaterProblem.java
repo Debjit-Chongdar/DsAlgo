@@ -1,4 +1,4 @@
-package problems;
+package problems.two_pointer;
 
 public class WaterProblem {
     //Simplified version
