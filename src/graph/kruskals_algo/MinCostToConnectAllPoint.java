@@ -3,6 +3,7 @@ package graph.kruskals_algo;
 import java.util.ArrayList;
 import java.util.List;
 
+//If edges is less then use kruskals algo  =>  O(E log V)
 public class MinCostToConnectAllPoint {
     public static int kruskals_algo(int[][] vertices){
         List<int[]> edgesWithCost = populateEdgesWithCost(vertices);

@@ -2,6 +2,8 @@ package graph.prim_algo;
 
 import java.util.*;
 
+//if Vertices are less use prim algo  =>  O((V + E) log V)  or  O(V²)
+
 // We have few vertices position, which can connect each other, find the smallest edge to connect all vertices
 // difference between two vertices is the cost/weight of the edge
 //[[0,0],[2,2],[3,3],[2,4],[4,2]]
