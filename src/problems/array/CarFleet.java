@@ -22,11 +22,13 @@ public class CarFleet {
             int distance = target-pairs[i].position;
             timeToReachDestination[i] = distance/pairs[i].speed;
         }
+        double lastTime = timeToReachDestination[timeToReachDestination.length-1];
         int count = 1;
         for(int i=pairs.length-2; i>=0; i--){
-            if(timeToReachDestination[i] > timeToReachDestination[i+1]){
+            if(timeToReachDestination[i] > lastTime){
                 count++;
             }
+            lastTime = Math.max(lastTime, timeToReachDestination[i]);
         }
         return count;
     }
@@ -39,5 +41,9 @@ public class CarFleet {
         int[] position1 = {4,1,0,7};
         int[] speed1 = {2,2,1,1};
         System.out.println(carFleet(10, position1, speed1));
+
+        int[] position2 = {5,4,7};
+        int[] speed2 = {2,2,1};
+        System.out.println(carFleet(10, position2, speed2));
     }
 }
