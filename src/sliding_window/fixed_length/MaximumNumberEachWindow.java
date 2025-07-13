@@ -1,9 +1,11 @@
-package sliding_window.varialble_length;
+package sliding_window.fixed_length;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class MaximumNumberEachWindow {
+
+    //[1,2,1,0,4,2,6] window = 3, Result = [2, 2, 4, 4, 6]
     public static int[] maxNumberInWindow(int[] nums, int window){
         // first calculate the size of the target/result array
         int size = 0;

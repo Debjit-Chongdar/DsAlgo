@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// Permutation -> (1,2,3) => [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 public class Permutation {
 
     public static List<List<Integer>> getAllPermutations(int[] nums){
