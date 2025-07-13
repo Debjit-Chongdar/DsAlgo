@@ -1,4 +1,4 @@
-package problems.linkedList;
+package linkedList;
 
 //1->2->3->4->5->3....
 public class LoopPresentInLinkedList {

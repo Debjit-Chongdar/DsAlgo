@@ -1,4 +1,4 @@
-package problems.linkedList;
+package linkedList;
 
 //1->2->3->7->8->9
 //4->7->8->9            result => 7->8->9

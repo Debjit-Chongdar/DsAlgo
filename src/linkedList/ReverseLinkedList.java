@@ -1,6 +1,6 @@
-package problems.linkedList;
+package linkedList;
 
-import static problems.linkedList.Util.showData;
+import static linkedList.Util.showData;
 
 // 1->2->3->4   result= 4->3->2->1
 public class ReverseLinkedList {

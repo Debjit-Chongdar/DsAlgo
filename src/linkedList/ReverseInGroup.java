@@ -1,8 +1,6 @@
-package problems.linkedList;
+package linkedList;
 
-import java.util.LinkedList;
-
-import static problems.linkedList.Util.showData;
+import static linkedList.Util.showData;
 
 //1->2->3->4->5->6->7->8 group = 3
 // result = 3->2->1  ->6->5->4  ->8->7

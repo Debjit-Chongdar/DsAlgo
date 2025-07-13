@@ -1,6 +1,6 @@
-package problems.linkedList;
+package linkedList;
 
-import static problems.linkedList.Util.showData;
+import static linkedList.Util.showData;
 
 // 1->3->4->6
 // 0->2->5->7->8

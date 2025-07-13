@@ -1,6 +1,6 @@
-package problems.linkedList;
+package linkedList;
 
-import static problems.linkedList.Util.showData;
+import static linkedList.Util.showData;
 
 //Swap node in pairs
 // 1->2->3->4  Result = 2->1->4->3
