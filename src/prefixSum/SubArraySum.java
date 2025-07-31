@@ -1,4 +1,4 @@
-package range_query;
+package prefixSum;
 
 import java.util.HashMap;
 import java.util.Map;

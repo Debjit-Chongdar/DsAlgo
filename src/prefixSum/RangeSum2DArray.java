@@ -1,4 +1,4 @@
-package range_query;
+package prefixSum;
 
 public class RangeSum2DArray {
     //top left row, col is starting and bottom right row, col is end

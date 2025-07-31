@@ -1,4 +1,4 @@
-package range_query;
+package prefixSum;
 
 public class PivotIndex {
     //find the index which sum of leftPart == sum of rightPart
