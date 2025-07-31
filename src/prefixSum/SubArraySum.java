@@ -6,18 +6,18 @@ import java.util.Map;
 public class SubArraySum {
     // find out all subArray having sum equal to k
     public static int subArraySum(int[] nums, int k){
-        int result = 0;
+        int count = 0;
+        int prefixSum = 0;
         Map<Integer, Integer> prefixSumOccurance = new HashMap<>();
-        int prefix = 0;
-        prefixSumOccurance.put(prefix, 1); //0'th positions prefix sum is 0
-        for(int i=0; i<nums.length; i++){
-            if(prefixSumOccurance.containsKey(prefix-k)){
-                result += prefixSumOccurance.get(prefix-k);
+        prefixSumOccurance.put(0, 1); //0'th positions prefix sum is 0
+        for(int num : nums){
+            prefixSum += num;
+            if(prefixSumOccurance.containsKey(prefixSum-k)){
+                count += prefixSumOccurance.get(prefixSum-k);
             }
-            prefixSumOccurance.put(prefix, prefixSumOccurance.getOrDefault(prefix, 0)+1);
-            prefix += nums[i];
+            prefixSumOccurance.put(prefixSum, prefixSumOccurance.getOrDefault(prefixSum, 0)+1);
         }
-        return result;
+        return count;
     }
 
     public static void main(String[] args) {
