@@ -3,13 +3,13 @@
 -- dense_rank()  input={1,2,2,3} output => {1,2,2,3}    for same value {2,2} same rank, then next
 
 -- top 2 amount from each region
-with cte as (select region, row_number() over (partition by region order by amount desc) as rn)
-select region from cte where rn < 3;
+WITH cte AS (SELECT region, row_number() OVER (PARTITION BY region ORDER BY amount DESC) AS rn)
+SELECT region FROM cte WHERE rn < 3;
 
 -- top 2 total amount belongs to which region
-with CTE as (select region, sum(amount) as total_amount from order group by region),
-     CTE1 as (select region, total_amount, row_number() over (order by total_amount desc) as rn from CTE)
-     select region, total_amount from CTE1 where rn < 3;
+WITH CTE AS (SELECT region, SUM(amount) AS total_amount FROM order_table GROUP BY region),
+     CTE1 AS (SELECT region, total_amount, row_number() OVER (ORDER BY total_amount DESC) AS rn FROM CTE)
+     SELECT region, total_amount FROM CTE1 WHERE rn < 3;
 
 -- add value type column based on order amount
 SELECT order_id, user_name,
