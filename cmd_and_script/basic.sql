@@ -1,6 +1,11 @@
 -- row_number()  input={1,2,2,3} output => {1,2,3,4}    for same value {2,2} but different row number {2,3}
 -- rank()        input={1,2,2,3} output => {1,2,2,4}    for same value {2,2} skip next rank {3}
 -- dense_rank()  input={1,2,2,3} output => {1,2,2,3}    for same value {2,2} same rank, then next
+-- UCASE(col) / LCASE(col)      uppercase & lower case
+-- MID()    MID(col, start, length)     sub String value start from and length
+-- LEN()     length of a string
+-- ROUND()     Round(col, int decimal)
+-- AVG(), COUNT(), SUM(), FIRST(), LAST(), MAX(), MIN()
 
 -- top 2 amount from each region
 WITH cte AS (SELECT region, row_number() OVER (PARTITION BY region ORDER BY amount DESC) AS rn)
@@ -28,3 +33,10 @@ ORDER BY
     WHEN City IS NULL THEN Country
     ELSE City
 END);
+
+-- Date operation
+WHERE order_date <> '2025-09-11';
+WHERE order_date BETWEEN '2025-01-01' AND '2025-03-31';
+WHERE DATE(order_date) = CURDATE();      -- today
+WHERE YEAR(order_date) = 2025;           -- year check
+WHERE MONTH(order_date) = 9;             -- September
