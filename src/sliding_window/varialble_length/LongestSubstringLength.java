@@ -26,7 +26,7 @@ public class LongestSubstringLength {
         }
         return maxLength;
     }
-    //optimum solution
+    //optimum solution => Giving wrong response
     public static int lengthOfLongestSubstring_optimum(String s) {
         int l = 0;
         int r = 0;
