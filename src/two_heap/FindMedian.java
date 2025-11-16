@@ -24,13 +24,13 @@ public class FindMedian {
             return nums.get(index);
         }
     }
-    //Optimized way to get median
+    //Optimized way to get median (instead nlogn, we can do it in logn)
     // try to keep both queue same element, for odd number any heap can have 1 extra element
     // small heap return value in desending order & large heap will return in ascending order
     private PriorityQueue<Integer> smallHeap = new PriorityQueue<>((a,b) -> b-a); //keep small half values in this queue
     private PriorityQueue<Integer> largeHeap = new PriorityQueue<>((a,b) -> a-b); //keep large half values in this queue
 
-    public void add_heap(int data){
+    public void add_heap(int data){     // O(log(n)) + O(log(n)) => log(n)
         if(smallHeap.size() < largeHeap.size()){ // if smallHeap has less data then we have to add in small heap
             largeHeap.offer(data);
             smallHeap.offer(largeHeap.poll());
