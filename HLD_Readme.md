@@ -48,6 +48,17 @@ Monoliths vs Microservices:
     - Avoiding cascading failure
     - Containerization (Docker, Kubernetes)
 
+Design Pattern - Microservice Architecture:
+    - Api Gateway Pattern
+    - Service Registry Pattern
+    - Circuit Breaker Pattern
+    - Saga Pattern
+    - Event sourcing Pattern 
+    - Strangler Pattern (Monolith to micro..)
+    - Bulkhead Pattern
+    - Api Composition Pattern (gather data from multiple micro..)
+    - CQRS Design Pattern (Command & Query)
+
 Monitoring and Logging:
     - Logging events & monitoring metrics
     - Anomaly detection
