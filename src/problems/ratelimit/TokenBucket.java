@@ -6,16 +6,16 @@ import java.util.Date;
 //refill bucket in a fixed interval or/ refill bucket by each request
 public class TokenBucket {
 
-    private double maxRequest;
-    // refill rate per second
-    private int refillRate; // 5 token per second -> 30 token per min
+    private double bucketCapacity;
+
+    private int refillRate_perSecond;
 
     private double tokenLeft;
     private long lastRefillTime;
 
     public TokenBucket(double maxRequest, int refillRate){
-        this.refillRate = refillRate;
-        this.maxRequest = maxRequest;
+        this.refillRate_perSecond = refillRate;
+        this.bucketCapacity = maxRequest;
         this.tokenLeft = maxRequest;
         this.lastRefillTime = new Date().getTime();
     }
@@ -24,7 +24,7 @@ public class TokenBucket {
         // micro batch will refill the tokens
         refill();
         // if token available then continue
-        if(tokenLeft > 0){
+        if(tokenLeft >= 1){ // don't check with > 0, then it may consider 0.0001
             tokenLeft--;
             return true;
         }
@@ -35,11 +35,13 @@ public class TokenBucket {
         long now = new Date().getTime();
         // refill rate is in second so convert it to millisecond
         // then find how many token should add by the time spend from last refill time
-        double tokensToAdd = (now - lastRefillTime) / 1000.0 * refillRate;
-        // if for long time request not being made then tokenToAdd may be greater than maxToken
-        tokenLeft = Math.min(tokenLeft + tokensToAdd, maxRequest);
-        // update last refill time
-        lastRefillTime = now;
+        double tokensToAdd = (now - lastRefillTime) / 1000.0 * refillRate_perSecond;
+        if(tokensToAdd >= 1.0) { // don't check with > 0, then it may consider 0.0001
+            // if for long time request not being made then tokenToAdd may be greater than maxToken
+            tokenLeft = Math.min(tokenLeft + tokensToAdd, bucketCapacity);
+            // update last refill time
+            lastRefillTime = now;
+        }
     }
 
     public static void main(String[] args) throws InterruptedException{
