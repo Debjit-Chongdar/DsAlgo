@@ -1,0 +1,71 @@
+❌ When NOT to Use AWS Lambda
+Case	                        Why Not
+Long-running tasks (>15 min)	Max timeout = 15 min
+Heavy CPU / Memory jobs	        Limited compute
+Constant background jobs	    Very expensive
+Stateful applications	        Lambda is stateless
+Very low latency systems	    Cold start delay
+_________________________________________________________________________________
+⚡ Lambda vs EC2 vs Containers (Quick)
+Feature	            Lambda	        EC2	        Containers
+Server management	❌	            ✅	        ❌
+Auto scaling	    ✅	            Manual	    Semi
+Best for	        Short tasks	    Long jobs	Microservices
+Pricing	            Per execution   Hourly	    Resource-based
+__________________________________________________________________________________
+🔥 (Partitioning, Sharding, Replication)
+Feature	    Partitioning	    Sharding	    Replication
+Purpose	    Performance	        Scalability	    Availability
+Servers	    Single / cluster	Multiple	    Multiple
+Data split	Yes	                Yes	            No
+Data copy	No	                No	            Yes
+Scale	    Vertical	        Horizontal	    Read scale
+__________________________________________________________________________________
+🏗 Real World Architecture Example
+Large E-commerce Platform
+Users DB → Sharded by UserID
+Orders DB → Partitioned by Date
+Product DB → Replicated for fast read
+__________________________________________________________________________________
+🚀 When to Use What?
+Situation	        Use
+Huge tables	        Partitioning
+Millions of users	Sharding
+High availability	Replication
+Heavy read traffic	Replication
+Big data growth	    Sharding + Replication
+__________________________________________________________________________________
+🎯 Interview One-Line Answers
+Partitioning:
+    Splitting data into logical parts for performance.
+Sharding:
+    Horizontal partitioning across multiple servers for scalability.
+Replication:
+    Creating multiple copies of data for availability and fault tolerance.
+__________________________________________________________________________________
+📊 Consistency Levels Comparison Table
+Level	            Guarantee	        Speed	    Availability	    Use Case
+Strong	        Immediate correctness	Slow	    Low	                Banking
+Eventual            Eventually correct	Fast	    High	            Social apps
+Read-after-write    Own writes visible	Medium	    High	            User profile
+Monotonic Read	    No backward reads	Medium	    High	            Feeds
+Causal	            Order preserved	    Medium	    High	            Messaging
+________________________________________
+🔄 Database Examples
+Database	Consistency Model
+MySQL	    Strong
+PostgreSQL	Strong
+Oracle	    Strong
+MongoDB	    Tunable
+Cassandra	Eventual
+DynamoDB	Tunable
+Redis	    Eventual / Strong
+________________________________________
+⚡ When to Use What?
+
+Financial accuracy	        Strong
+High traffic social apps	Eventual
+User profile update	        Read-after-write
+Messaging apps	            Causal
+Analytics	                Eventual
+________________________________________

@@ -1,0 +1,36 @@
+Idempotent Producer -> Ensures no duplicate messages even if retry happens.
+
+❌ Having more consumers than partitions wastes resources * extra consumers will remain idle
+
+Number of consumers in a group should be ≤ number of partitions, 1 consumer can read from multiple partition
+
+| Guarantee     | Duplicate Risk                    |
+| ------------- | --------------------------------- |
+| At-most-once  | No duplicate, data loss possible  |
+| At-least-once | No data loss, duplicates possible |
+| Exactly-once  | No loss, no duplicate             |
+
+Offset commit strategy : enable.auto.commit=false, Use manual commit only after successful processing.
+
+1. if Kafka consumer lagging heavily behind the producer, what step will you follow ??
+2. Kafka broker is down ??
+3. Duplicate msg seen by consumer ??
+4. Data loss in Kafka, possible reason and how do you prevent it ??
+5. Kafka topic growth causes disk issue ??
+6. Rebalancing happening frequently, reason and fix??
+7. Ordering gurantees, how do you preserve it ??
+8. if you want to sclale out consumer, waht shoud you aware of ??
+9. If Kafka connect fails to sink data in target system ??
+10. If schema evaluation fails, what went wrong ??
+11. if kafka stream application crash ??
+12. reason of kafka producer throughput drops??
+13. how to reprocess massages from the beggining of the topic ??  (reset offset / create new consumer group id)
+14. Kafka cluster under high load , reason and fix??
+15. Kafka consumer crashes after deserialization, issue and fix ??
+16. If we want to migrate kafka topic to another cluster ??
+17. if we want to process real time data and batch data over same kafka topic ??
+18. if message are arraiving out of order??
+19. consumer lag spike during high traffic ??
+20. messages disappear after broker crash ??
+21. kafka connect MongoDB sink fails silently
+22. Kafka stream app reproccesing all data after restart ??

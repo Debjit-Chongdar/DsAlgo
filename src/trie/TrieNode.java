@@ -8,13 +8,6 @@ public class TrieNode {
         endOfWord = false;
     }
 }
-//           root
-//         /  |  \
-//        d   b   m
-//       /    |    \
-//      a     a     a
-//     /      |      \
-//   (y)     (y)     (y)
 
 //           root
 //         /  |  \

@@ -23,8 +23,8 @@ Cache:
     - CDN
 
 Networking:
-    - TCP
-    - UDP
+    - TCP (Transmission control protocol)
+    - UDP (User datagram protocol)
     - http & https
     - FTP (not secured, no encryption)
     - SMTP / IMAP (send/receive mail)

@@ -6,9 +6,9 @@ SOLID Principles:
     - Dependency Inversion
 
 Design Pattern:
-    - Creational (Singleton, Factory, )
-    - Structural (Proxy, Bridge)
-    - Behavioural (Strategy, Command, Observer)
+    - Creational (Singleton, Factory, Builder)
+    - Structural (Proxy, Bridge, Adapter, Decorator)
+    - Behavioural (Strategy, Command, Observer, Chain Of Responsibility)
 
 Concurrency & Thread Safety:
     - Thread safe injection 

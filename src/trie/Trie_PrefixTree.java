@@ -1,16 +1,5 @@
 package trie;
 
-import java.util.HashMap;
-import java.util.Map;
-
-class TrieNodeMap{ // using map
-    public Map<Character, TrieNodeMap> children;
-    public boolean endOfString;
-    public TrieNodeMap(){
-        children = new HashMap<>();
-        endOfString = false;
-    }
-}
 public class Trie_PrefixTree {
     private TrieNode root; //using array
     private TrieNodeMap root_map; // using map
