@@ -69,3 +69,25 @@ User profile update	        Read-after-write
 Messaging apps	            Causal
 Analytics	                Eventual
 ________________________________________
+🔹 How to Take Heap Dump
+
+1️⃣ Automatic Heap Dump
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/opt/dumps
+2️⃣ Using jmap
+jmap -dump:live,format=b,file=heap.hprof <pid>
+3️⃣ Using jcmd
+jcmd <pid> GC.heap_dump heap.hprof
+
+🔹 Tools to Analyze Heap Dump
+
+Eclipse MAT ⭐
+JProfiler
+IntelliJ Profiler
+
+Step 1️⃣: Open in Eclipse MAT
+File → Open Heap Dump → heap.hprof
+Step 2️⃣: Run Leak Suspect Report ⭐
+Reports → Leak Suspects → Run
+Step 3️⃣: Analyze Dominator Tree (MOST IMPORTANT ⭐)
+Which objects are retaining most memory

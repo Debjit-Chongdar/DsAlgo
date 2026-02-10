@@ -35,6 +35,10 @@ Networking:
     - long polling
     - Web hook
     - Api calls (client req for data)
+            - Rest Api call
+            - SOAP Api call
+            - gRPC (HTTP2 + protobuf) internal microservice
+            - GraphQL (client control response field)
 
 Load Balencer:
     - Load balancing Algo (Stateful vs Stateless)
@@ -58,6 +62,9 @@ Design Pattern - Microservice Architecture:
     - Bulkhead Pattern
     - Api Composition Pattern (gather data from multiple micro..)
     - CQRS Design Pattern (Command & Query)
+
+KISS Principles:
+    Keep It Simple and Stupid microservice
 
 Monitoring and Logging:
     - Logging events & monitoring metrics

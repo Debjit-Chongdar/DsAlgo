@@ -1,0 +1,44 @@
+// command line runner
+@Component
+public class MyApp implements CommandLineRummer{
+    @Override
+    public void run(String[] args){
+        System.out.println("Application has started");
+    }
+}
+// Application Runner
+@Component
+class MyApp implements ApplicationRunner{
+    @Override
+    public void run(ApplicationArguments args){
+        System.out.println("Application has started with arguments");
+    }
+}
+
+//basic and Standard Way to create spring boot application
+@SpringBootApplication
+class MyApp{
+    public static void main(String[] args){
+        SpringApplication.run(MyApp.class, args);
+    }
+}
+
+//Spring application builder
+@SpringBootApplication
+class MyApp{
+    public static void main(String[] args){
+        new SpringApplicationBuilder(MyApp.class).profiles("dev").run(args);
+    }
+}
+
+//War file deploying to external tomcat or other server - No embedded server
+@SpringBootApplication
+class MyApp implements SpringBootServletInitializer{
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+        return builder.source(MyApp.class);
+    }
+    public static void main(String[] args){
+        new SpringApplicationBuilder(MyApp.class).build().run(args);
+    }
+}
