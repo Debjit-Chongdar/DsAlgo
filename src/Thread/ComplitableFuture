@@ -1,0 +1,5 @@
+
+@Async
+public ComplitableFuture<EMP> callRestApi(List<Integer> ids){
+    return ComplitableFuture.completedFuture(restApi.get(ids));
+}

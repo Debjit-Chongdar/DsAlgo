@@ -5,6 +5,7 @@ $ kill <PID>  # Kill or stop existing running process with process ID
 $ kill -9 <PID> ## force stop
 
 $ java -jar dimension-api.jar   # Run the jar in a normal way
+$ mvn spring-boot.run # run in local
 $ ./dimension-api.jar start
 
 $ ls | grep dimen   # find all file/folder name with dimen
@@ -27,3 +28,16 @@ $ rm api.log  # delete empty file
 $ cp file1.txt file2.txt    # copy content from file1.txt to file2.txt
 $ mv file.txt tmpFolder   # move file to tmpFolder
 $ diff file1.txt file2.txt    # line by line difference between file1.txt vs file2.txt
+
+# Debugging CPU spike
+$ jps # Java process id
+$ top -H -p <pid> # will show thread level CPU usage
+$ jstack <pid> threaddump.txt # take thread dump
+
+# Debugging HEAP memory spike
+$ jstat -gc <pid> 1000  # check GC behaviour
+$ jmap -dump:live,format=b,file=heap.hprof <pid> # Heap DUMP EclipsMat, Jprofiler, Intellij profiler to view
+$ jcmd <pid> GC.heap_dump /log/dump/heap.hprof # Eclipse MAT -> File → Open Heap Dump → heap.hprof
+#Automate heap dump
+$ -XX:+HeapDumpOnOutOfMemoryError
+$ -XX:HeapDumpPath=/log/dump/
