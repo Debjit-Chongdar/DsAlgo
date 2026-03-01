@@ -1,0 +1,3 @@
+notify() -> Belongs to object,
+wait() -> Belongs to object, release lock, must be synchronized, notify can resume
+sleep() -> Belongs to Thread, lock not release, not nessesary to be sync, for specific time, notify wont resume
