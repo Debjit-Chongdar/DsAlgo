@@ -1,9 +1,9 @@
 package Thread;
 
-import java.util.LinkedList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ForkJoinPool;
+import java.util.stream.Collectors;
 
 public class TopicExample {
     private final Queue<String> topic = new LinkedList<>();
@@ -43,8 +43,20 @@ public class TopicExample {
     }
 
     public static void main(String[] args) throws InterruptedException{
-        List<String> list = Arrays.asList("A", "B", "C", "D", "E", "F", "G","H","I");
         TopicExample topic = new TopicExample();
+        /*List<String> list = Arrays.asList("A", "B", "C", "D", "E", "F", "G","H","I");
+
+        List<Runnable> tasks = list.stream().map(
+                s -> (Runnable) () -> topic.producer(s)
+        ).collect(Collectors.toList());
+        List<Callable<String>> consumerTasks = list.stream().map(
+                s -> (Callable<String>)()->topic.consumer()
+        ).collect(Collectors.toList());
+
+        ForkJoinPool pool = ForkJoinPool.commonPool();
+        tasks.forEach(task -> pool.submit(task));
+        pool.shutdown();
+        pool.invokeAll(consumerTasks).forEach(System.out::print);*/
 
         Thread t1 = new Thread(() -> topic.producer("A"));
         Thread t2 = new Thread(() -> topic.producer("B"));
