@@ -12,20 +12,20 @@ Collectors.groupingBy(
         Collections::unmodifiableList )
 )
 Collectors.reducing(0, Integer::sum)        -> min value is 0
-------- Custom Collector ----------------
-List<String> result = stream.collect(
-    Collector.of(
-        ArrayList::new,
-        List::add,
-        (left, right) -> { left.addAll(right); return left; }
-    )
-);
 --------- nested collector --------------
 Map<String, Long> map = orders.stream()
     .collect(Collectors.groupingBy(
         Order::getCountryCode,
         Collectors.counting()
     ));
+------- Custom Collector ----------------
+List<String> result = stream.collect(
+    Collector.of(
+        ArrayList::new,         // Supplier
+        List::add,              // Accumulator
+        (left, right) -> { left.addAll(right); return left; }   // Combiner
+    )
+);
 ------------ Collect to a comma-separated String ---------------
 String result = list.stream().collect(
     Collector.of(
@@ -111,3 +111,42 @@ public class Top3OrderCollector implements Collector<Order, List<Order>, List<Or
 }
 ✅ How to use it
 List<Order> top3 = orders.stream().collect(new Top3OrderCollector());
+**************************************************************************************
+public class GroupingCollector implements Collector<Order, Map<Integer, List<Order>>, Map<Integer, List<Order>>> {
+
+    @Override
+    public Supplier<Map<Integer, List<Order>>> supplier() {
+        return HashMap::new;
+    }
+
+    @Override
+    public BiConsumer<Map<Integer, List<Order>>, Order> accumulator() {
+        return (map, order) -> {
+            map.computeIfAbsent(order.getCountryId(), k -> new ArrayList<>())
+               .add(order);
+        };
+    }
+
+    @Override
+    public BinaryOperator<Map<Integer, List<Order>>> combiner() {
+        return (map1, map2) -> {
+            map2.forEach((key, value) ->
+                map1.merge(key, value, (l1, l2) -> {
+                    l1.addAll(l2);
+                    return l1;
+                })
+            );
+            return map1;
+        };
+    }
+
+    @Override
+    public Function<Map<Integer, List<Order>>, Map<Integer, List<Order>>> finisher() {
+        return map -> map;
+    }
+
+    @Override
+    public Set<Characteristics> characteristics() {
+        return EnumSet.of(Characteristics.IDENTITY_FINISH);
+    }
+}
