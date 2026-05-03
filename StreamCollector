@@ -1,3 +1,16 @@
+    *********** ParallelStream VS Stream ***********
+Trap 1: For each with Shared state
+Trap 2: assuming parallel is always faster
+Trap 3: blocking inside parallel stream -> inside map using findById() DB call
+Trap 4: custom Fork join pool not used, normally it use common pool shared across JVM,
+        other task can be impacted like tomcat
+
+        ForkJoinPool pool = new ForkJoinPool(4);
+        pool.submit(() -> list.parallelStream().map(--).collect(--)).get();
+
+    .forEach vs .forEachOrdered()...maintain order
+    .collect() ... always maintain order
+
 Collectors.counting() -> returns count
 Collectors.summingInt(Order::getOrder_count) -> return sum value
 Collectors.averagingInt(Order::getOrder_count) -> return average value
