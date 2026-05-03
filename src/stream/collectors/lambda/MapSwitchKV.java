@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 public class MapSwitchKV {
 
     static Map<String, Set<String>> swithKeyValue(Map<String, String> map){
-        return map.entrySet().stream().collect(Collectors.groupingBy(e -> e.getValue(),
-                Collectors.mapping(e -> e.getKey(), Collectors.toSet())));
+        return map.entrySet().stream().collect(
+                Collectors.groupingBy(
+                        e -> e.getValue(),
+                        Collectors.mapping(e -> e.getKey(), Collectors.toSet())
+                )
+        );
     }
 
     //create and use Custom Collectors

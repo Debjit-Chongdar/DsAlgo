@@ -1,0 +1,23 @@
+1. str.split("")
+String str = "abc";
+String[] arr = str.split("");
+Returns: String[] → ["a", "b", "c"]
+
+List<String> list = Arrays.asList(str.split(""));
+✅ Works as expected → ["a", "b", "c"]
+
+2. str.toCharArray()
+char[] arr = str.toCharArray();
+Returns: char[] → ['a', 'b', 'c'] (primitive array)
+
+List<char[]> list = Arrays.asList(str.toCharArray());
+⚠️ Gives:
+[['a','b','c']]    --> A list with ONE element (the whole array), not individual characters.
+
+💥 Why this happens
+
+Arrays.asList() works like this:
+For object arrays (T[]) → converts elements into a list ✅
+For primitive arrays (char[], int[]) → treats the entire array as a single object ❌
+
+Because primitives are not objects, Java doesn’t auto-split them.
