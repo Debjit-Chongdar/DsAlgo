@@ -39,46 +39,6 @@ List<String> result = stream.collect(
         (left, right) -> { left.addAll(right); return left; }   // Combiner
     )
 );
------------- Collect to a comma-separated String ---------------
-String result = list.stream().collect(
-    Collector.of(
-        StringBuilder::new,                     // Supplier
-        (sb, s) -> sb.append(s).append(","),    // Accumulator
-        (sb1, sb2) -> sb1.append(sb2),          // Combiner
-        sb -> {                                 // Finisher
-            if (sb.length() > 0) sb.setLength(sb.length() - 1); // to remove last comma
-            return sb.toString();
-        }
-    )
-);
--------------- Custom collector for summing integers -----------------
- Integer sum = numbers.stream().collect(
-     Collector.of(
-         () -> new int[1],                 // Supplier
-         (arr, n) -> arr[0] += n,          // Accumulator
-         (arr1, arr2) -> {                 // Combiner
-            arr1[0] += arr2[0];
-             return arr1;
-        },
-         arr -> arr[0]                     // Finisher
-     )
- );
------------------- Collect only top 3 elements ------------------------------
-   List<Order> top3 = orders.stream().collect(
-       Collector.of(
-           ArrayList::new,          // Supplier
-           (list, o) -> {           // Accumulator
-               list.add(o);
-               list.sort(Comparator.comparingInt(Order::getOrder_count).reversed());
-               if (list.size() > 3) list.remove(list.size() - 1);
-           },
-           (l1, l2) -> {            // Combiner
-               l1.addAll(l2);
-               l1.sort(Comparator.comparingInt(Order::getOrder_count).reversed());
-               return l1.subList(0, Math.min(3, l1.size()));
-           }
-       )
-   );
 
 ✅ Custom Collector Class (Top 3 Orders)
 import java.util.*;
